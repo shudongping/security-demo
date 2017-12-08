@@ -3,6 +3,7 @@ package com.imooc.web.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
 import com.imooc.dto.UserQueryCondition;
+import com.imooc.exception.UserNotExistException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +21,8 @@ import java.util.List;
 public class UserController {
 
     @PostMapping
-    public User create(@Valid @RequestBody User user, BindingResult errors){
+    public User create(@Valid @RequestBody User user){
 
-        if(errors.hasErrors()){
-            errors.getAllErrors().stream().forEach(error -> System.out.println(error.getDefaultMessage()));
-        }
 
         System.out.println(user.getUsername());
         System.out.println(user.getId());
@@ -35,7 +33,7 @@ public class UserController {
     }
 
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id:\\d+}")
     public User update(@Valid @RequestBody User user, BindingResult errors){
 
         if(errors.hasErrors()){
@@ -53,9 +51,8 @@ public class UserController {
         return user;
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id:\\d+}")
     public void delete(@PathVariable String id){
-
        System.out.println(id);
     }
 
@@ -75,6 +72,9 @@ public class UserController {
     @GetMapping("/{id:\\d+}")
     @JsonView(User.UserDetailView.class)
     public User getInfo(@PathVariable String id){
+//        throw new UserNotExistException(id);
+
+        System.out.println("user service");
         User user = new User();
         user.setUsername("tom");
         return user;
