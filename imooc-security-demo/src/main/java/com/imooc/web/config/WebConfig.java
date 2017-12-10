@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -16,7 +17,7 @@ import java.util.List;
  * @author shudp
  * @create 2017/12/8.
  */
-@Configuration
+//@Configuration
 public class WebConfig extends WebMvcConfigurerAdapter{
 
     @Autowired
@@ -27,8 +28,12 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         registry.addInterceptor(timeInterceptor);
     }
 
+    @Override
+    public void configureAsyncSupport(AsyncSupportConfigurer configurer){
+        super.configureAsyncSupport(configurer);
+    }
 
-    @Bean
+//    @Bean
     public FilterRegistrationBean timeFilter(){
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         TimeFilter timeFilter = new TimeFilter();

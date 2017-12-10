@@ -3,7 +3,8 @@ package com.imooc.web.controller;
 import com.fasterxml.jackson.annotation.JsonView;
 import com.imooc.dto.User;
 import com.imooc.dto.UserQueryCondition;
-import com.imooc.exception.UserNotExistException;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,7 @@ import java.util.List;
 public class UserController {
 
     @PostMapping
-    public User create(@Valid @RequestBody User user){
+    public User create(@Valid @RequestBody User user) {
 
 
         System.out.println(user.getUsername());
@@ -34,12 +35,12 @@ public class UserController {
 
 
     @PutMapping("/{id:\\d+}")
-    public User update(@Valid @RequestBody User user, BindingResult errors){
+    public User update(@Valid @RequestBody User user, BindingResult errors) {
 
-        if(errors.hasErrors()){
-            errors.getAllErrors().stream().forEach(error ->{
-                FieldError fieldError = (FieldError)error;
-                String message = fieldError.getField() +" "+ error.getDefaultMessage();
+        if (errors.hasErrors()) {
+            errors.getAllErrors().stream().forEach(error -> {
+                FieldError fieldError = (FieldError) error;
+                String message = fieldError.getField() + " " + error.getDefaultMessage();
                 System.out.println(message);
             });
         }
@@ -52,15 +53,14 @@ public class UserController {
     }
 
     @DeleteMapping("/{id:\\d+}")
-    public void delete(@PathVariable String id){
-       System.out.println(id);
+    public void delete(@PathVariable String id) {
+        System.out.println(id);
     }
-
-
 
 
     @GetMapping
     @JsonView(User.UserSimpleView.class)
+    @ApiOperation(value = "用户查询服务")
     public List<User> query(UserQueryCondition userQueryCondition) {
         List<User> users = new ArrayList<>();
         users.add(new User());
@@ -71,7 +71,8 @@ public class UserController {
 
     @GetMapping("/{id:\\d+}")
     @JsonView(User.UserDetailView.class)
-    public User getInfo(@PathVariable String id){
+
+    public User getInfo(@ApiParam(value = "用户id") @PathVariable String id) {
 //        throw new UserNotExistException(id);
 
         System.out.println("user service");

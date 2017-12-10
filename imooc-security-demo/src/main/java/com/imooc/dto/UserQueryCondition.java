@@ -1,14 +1,16 @@
 package com.imooc.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 /**
  * @author shudp
  * @create 2017/12/6.
  */
 public class UserQueryCondition {
     private String username;
-
+    @ApiModelProperty(value = "年龄")
     private int age;
-
+    @ApiModelProperty(value = "年龄结束")
     private int ageTo;
 
     private String xx;
