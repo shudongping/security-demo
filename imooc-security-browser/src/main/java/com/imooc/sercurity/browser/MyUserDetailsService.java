@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @create 2017/12/12.
  */
 @Component
-public class MyUserDetailsService implements UserDetailsService{
+public class MyUserDetailsService implements UserDetailsService {
 
     private org.slf4j.Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
@@ -27,6 +27,6 @@ public class MyUserDetailsService implements UserDetailsService{
         logger.info("登录用户名：" + username);
         String password = passwordEncoder.encode("123456");
         logger.info("数据库密码是：" + password);
-        return new User(username,passwordEncoder.encode("123456"),true,true,true,true, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
+        return new User(username, passwordEncoder.encode("123456"), true, true, true, true, AuthorityUtils.commaSeparatedStringToAuthorityList("admin"));
     }
 }

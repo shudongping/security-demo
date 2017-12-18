@@ -1,16 +1,12 @@
 package com.imooc.web.async;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.math.RandomUtils;
-import org.aspectj.lang.annotation.Around;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
-
-import java.util.concurrent.Callable;
 
 /**
  * @author shudp
@@ -28,14 +24,14 @@ public class AsyncController {
     private DeferredResultHold deferredResultHold;
 
     @RequestMapping("/order")
-    public  DeferredResult<String>  order() throws Exception {
+    public DeferredResult<String> order() throws Exception {
         logger.info("主线程开始");
 
         String orderNum = RandomStringUtils.randomNumeric(8);
         mockQueue.setPlaceOrder(orderNum);
 
         DeferredResult<String> result = new DeferredResult<>();
-        deferredResultHold.getMap().put(orderNum,result);
+        deferredResultHold.getMap().put(orderNum, result);
 
 //        Callable<String> result = new Callable<String>(){
 //
@@ -49,7 +45,7 @@ public class AsyncController {
 //        };
 
         logger.info("主线程返回");
-        return  result;
+        return result;
     }
 
 }

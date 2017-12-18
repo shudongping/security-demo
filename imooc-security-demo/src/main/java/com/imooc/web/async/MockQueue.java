@@ -32,7 +32,7 @@ public class MockQueue {
                 e.printStackTrace();
             }
             this.completeOrder = placeOrder;
-            logger.info("下单请求处理完毕，"+placeOrder);
+            logger.info("下单请求处理完毕，" + placeOrder);
         }).start();
 
 

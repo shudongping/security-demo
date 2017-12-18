@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
  * @author shudp
  * @create 2017/12/7.
  */
-@Target({ElementType.METHOD,ElementType.FIELD})
+@Target({ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = MyConstraintValidator.class)
 public @interface MyConstraint {

@@ -2,9 +2,6 @@ package com.imooc.web.aspect;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
@@ -22,7 +19,7 @@ public class TimeAspect {
         System.out.println("time aspect start");
 
         Object[] args = pjp.getArgs();
-        for(Object arg: args){
+        for (Object arg : args) {
             System.out.println(arg);
         }
 
@@ -32,8 +29,6 @@ public class TimeAspect {
 
         return object;
     }
-
-
 
 
 }

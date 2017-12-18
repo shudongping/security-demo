@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @create 2017/12/10.
  */
 @Component
-public class QueueListener implements ApplicationListener<ContextRefreshedEvent>{
+public class QueueListener implements ApplicationListener<ContextRefreshedEvent> {
     @Autowired
     private MockQueue mockQueue;
 
@@ -21,17 +21,18 @@ public class QueueListener implements ApplicationListener<ContextRefreshedEvent>
     private DeferredResultHold deferredResultHold;
 
     private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
         new Thread(() -> {
-            while (true){
-                if(StringUtils.isNotBlank(mockQueue.getCompleteOrder())){
+            while (true) {
+                if (StringUtils.isNotBlank(mockQueue.getCompleteOrder())) {
                     String orderNumber = mockQueue.getCompleteOrder();
-                    logger.info("返回订单处理结果："+ orderNumber);
+                    logger.info("返回订单处理结果：" + orderNumber);
                     deferredResultHold.getMap().get(orderNumber).setResult("place order success");
                     mockQueue.setCompleteOrder(null);
-                }else{
+                } else {
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {

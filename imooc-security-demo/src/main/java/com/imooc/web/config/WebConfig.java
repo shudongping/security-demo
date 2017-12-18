@@ -4,8 +4,6 @@ import com.imooc.web.filter.TimeFilter;
 import com.imooc.web.interceptor.TimeInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -18,7 +16,7 @@ import java.util.List;
  * @create 2017/12/8.
  */
 //@Configuration
-public class WebConfig extends WebMvcConfigurerAdapter{
+public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Autowired
     private TimeInterceptor timeInterceptor;
@@ -29,12 +27,12 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     }
 
     @Override
-    public void configureAsyncSupport(AsyncSupportConfigurer configurer){
+    public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
         super.configureAsyncSupport(configurer);
     }
 
-//    @Bean
-    public FilterRegistrationBean timeFilter(){
+    //    @Bean
+    public FilterRegistrationBean timeFilter() {
         FilterRegistrationBean registrationBean = new FilterRegistrationBean();
         TimeFilter timeFilter = new TimeFilter();
         registrationBean.setFilter(timeFilter);

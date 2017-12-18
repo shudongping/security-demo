@@ -4,7 +4,7 @@ package com.imooc.exception;
  * @author shudp
  * @create 2017/12/8.
  */
-public class UserNotExistException extends RuntimeException{
+public class UserNotExistException extends RuntimeException {
 
 
     private static final long serialVersionUID = -6112780192479692859L;

@@ -7,7 +7,7 @@ import javax.validation.ConstraintValidatorContext;
  * @author shudp
  * @create 2017/12/7.
  */
-public class MyConstraintValidator implements ConstraintValidator<MyConstraint,Object>{
+public class MyConstraintValidator implements ConstraintValidator<MyConstraint, Object> {
 
     @Override
     public void initialize(MyConstraint constraintAnnotation) {

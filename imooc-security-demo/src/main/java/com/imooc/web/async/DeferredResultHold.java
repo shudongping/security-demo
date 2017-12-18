@@ -12,7 +12,7 @@ import java.util.Map;
  */
 @Component
 public class DeferredResultHold {
-    private Map<String,DeferredResult<String>> map = new HashMap<>();
+    private Map<String, DeferredResult<String>> map = new HashMap<>();
 
     public Map<String, DeferredResult<String>> getMap() {
         return map;

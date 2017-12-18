@@ -14,14 +14,14 @@ import java.util.Date;
  * @create 2017/12/8.
  */
 @Component
-public class TimeInterceptor implements HandlerInterceptor{
+public class TimeInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         System.out.println("preHandle");
 
-        System.out.println(((HandlerMethod)o).getBean().getClass().getName());
-        System.out.println(((HandlerMethod)o).getMethod().getName());
-        httpServletRequest.setAttribute("startTime",new Date().getTime());
+        System.out.println(((HandlerMethod) o).getBean().getClass().getName());
+        System.out.println(((HandlerMethod) o).getMethod().getName());
+        httpServletRequest.setAttribute("startTime", new Date().getTime());
         return true;
     }
 

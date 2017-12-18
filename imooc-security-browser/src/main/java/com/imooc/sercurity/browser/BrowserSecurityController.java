@@ -35,8 +35,10 @@ public class BrowserSecurityController {
 
     @Autowired
     private SecurityProperties securityProperties;
+
     /**
      * 当需要身份认证时 跳转到这里
+     *
      * @param request
      * @param response
      * @return
@@ -45,13 +47,13 @@ public class BrowserSecurityController {
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public SimpleResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        SavedRequest savedRequest = requestCache.getRequest(request,response);
+        SavedRequest savedRequest = requestCache.getRequest(request, response);
 
-        if(savedRequest != null){
+        if (savedRequest != null) {
             String target = savedRequest.getRedirectUrl();
-            logger.info("请求"+target);
-            if(StringUtils.endsWithIgnoreCase(target,".html")){
-                redirectStrategy.sendRedirect(request,response,securityProperties.getBrowser().getLoginPage());
+            logger.info("请求: " + target);
+            if (StringUtils.endsWithIgnoreCase(target, ".html")) {
+                redirectStrategy.sendRedirect(request, response, securityProperties.getBrowser().getLoginPage());
             }
 
         }

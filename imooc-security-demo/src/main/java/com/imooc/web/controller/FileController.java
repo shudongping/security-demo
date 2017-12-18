@@ -28,7 +28,7 @@ public class FileController {
         System.out.println(file.getOriginalFilename());
         System.out.println(file.getSize());
 
-        File localFile = new File(folder,new Date().getTime() + ".txt");
+        File localFile = new File(folder, new Date().getTime() + ".txt");
 
         file.transferTo(localFile);
 
@@ -39,13 +39,13 @@ public class FileController {
     @GetMapping("/{id}")
     public void download(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        try(
-            InputStream inputStream = new FileInputStream(new File(folder,id + ".txt"));
-            OutputStream outputStream = response.getOutputStream();
-        ){
+        try (
+                InputStream inputStream = new FileInputStream(new File(folder, id + ".txt"));
+                OutputStream outputStream = response.getOutputStream();
+        ) {
             response.setContentType("application/x-download");
-            response.addHeader("Content-Disposition","attachment;filename=test.txt");
-            IOUtils.copy(inputStream,outputStream);
+            response.addHeader("Content-Disposition", "attachment;filename=test.txt");
+            IOUtils.copy(inputStream, outputStream);
             outputStream.flush();
         }
 
