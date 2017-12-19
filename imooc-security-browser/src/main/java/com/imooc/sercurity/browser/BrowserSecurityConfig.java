@@ -38,7 +38,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
         ValidateCodeFilter filter = new ValidateCodeFilter();
         filter.setAuthenticationFailureHandler(imoocAuthticationFailureHandler);
-
+        filter.setSecurityProperties(securityProperties);
+        filter.afterPropertiesSet();
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin().loginPage("/authentication/require")
                 .loginProcessingUrl("/authentication/form")
