@@ -8,6 +8,16 @@ public class BrowserProperties {
 
     private String loginPage = "/imooc-signIn.html";
 
+    private int rememberMeSeconds = 3600;
+
+    public int getRememberMeSeconds() {
+        return rememberMeSeconds;
+    }
+
+    public void setRememberMeSeconds(int rememberMeSeconds) {
+        this.rememberMeSeconds = rememberMeSeconds;
+    }
+
     private LoginType loginType = LoginType.JSON;
 
     public LoginType getLoginType() {

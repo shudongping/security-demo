@@ -1,9 +1,9 @@
 package com.imooc.security.core.validate.code;
 
 import com.imooc.security.core.properties.SecurityProperties;
+import com.imooc.security.core.validate.code.image.ImageCode;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.social.connect.web.HttpSessionSessionStrategy;
 import org.springframework.social.connect.web.SessionStrategy;
@@ -25,7 +25,7 @@ import java.util.Set;
  * @author shudp
  * @create 2017/12/17.
  */
-public class ValidateCodeFilter extends OncePerRequestFilter {
+public class ValidateCodeFilter extends OncePerRequestFilter implements InitializingBean {
 
 
     private AuthenticationFailureHandler authenticationFailureHandler;
@@ -41,8 +41,8 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
     @Override
     public void afterPropertiesSet() throws ServletException {
         super.afterPropertiesSet();
-        String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getImage().getUrl(),",");
-        for(String configUrl : configUrls){
+        String[] configUrls = StringUtils.splitByWholeSeparatorPreserveAllTokens(securityProperties.getCode().getImage().getUrl(), ",");
+        for (String configUrl : configUrls) {
             urls.add(configUrl);
         }
         urls.add("/authentication/form");
@@ -61,15 +61,15 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
 
         boolean action = false;
 
-        for(String url : urls){
-            if(pathMatcher.match(url,httpServletRequest.getRequestURI())){
+        for (String url : urls) {
+            if (pathMatcher.match(url, httpServletRequest.getRequestURI())) {
                 action = true;
             }
         }
 
         if (action) {
             try {
-                valdate(new ServletWebRequest(httpServletRequest));
+                validate(new ServletWebRequest(httpServletRequest));
             } catch (ValidateCodeException e) {
                 authenticationFailureHandler.onAuthenticationFailure(httpServletRequest, httpServletResponse, e);
                 return;
@@ -78,7 +78,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
-    private void valdate(ServletWebRequest servletWebRequest) throws ServletRequestBindingException {
+    private void validate(ServletWebRequest servletWebRequest) throws ServletRequestBindingException {
 
         ImageCode codeImSession = (ImageCode) sessionStrategy.getAttribute(servletWebRequest, ValidateCodeController.SESSION_KEY);
 
@@ -95,7 +95,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter {
             sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeController.SESSION_KEY);
             throw new ValidateCodeException("验证码已过期");
         }
-        if(!StringUtils.equals(codeImSession.getCode(),codeInRequest)){
+        if (!StringUtils.equals(codeImSession.getCode(), codeInRequest)) {
             throw new ValidateCodeException("验证码不匹配");
         }
         sessionStrategy.removeAttribute(servletWebRequest, ValidateCodeController.SESSION_KEY);
