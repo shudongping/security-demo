@@ -12,13 +12,13 @@ import org.springframework.web.context.request.ServletWebRequest;
  * @create 2017/12/20.
  */
 @Component("smsCodeProcessor")
-public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode>{
+public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode> {
 
     @Autowired
     private SmsCodeSender smsCodeSender;
 
     @Override
     protected void send(ServletWebRequest request, ValidateCode validate) throws Exception {
-        smsCodeSender.send(ServletRequestUtils.getRequiredStringParameter(request.getRequest(),"mobile"),validate.getCode());
+        smsCodeSender.send(ServletRequestUtils.getRequiredStringParameter(request.getRequest(), "mobile"), validate.getCode());
     }
 }

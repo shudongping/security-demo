@@ -4,7 +4,7 @@ package com.imooc.security.core.properties;
  * @author shudp
  * @create 2017/12/18.
  */
-public class ImageCodeProperties extends SmsCodeProperties{
+public class ImageCodeProperties extends SmsCodeProperties {
 
     private int width = 67;
     private int height = 23;

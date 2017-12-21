@@ -30,20 +30,21 @@ public abstract class AbstractValidateCodeProcessor<C extends ValidateCode> impl
         send(request, validateCode);
     }
 
+
     private C generate(ServletWebRequest request) {
         String type = getProcessorType(request);
-        ValidateCodeGenerator validateCodeGenerator = validateCodeGenerators.get(type+"CodeGenerator");
+        ValidateCodeGenerator validateCodeGenerator = validateCodeGenerators.get(type + "CodeGenerator");
         return (C) validateCodeGenerator.generate(request);
     }
 
     protected abstract void send(ServletWebRequest request, C validate) throws Exception;
 
 
-    protected void save(ServletWebRequest request, C validate) throws Exception{
-        sessionStrategy.setAttribute(request,SESSION_KEY_PREFIX + getProcessorType(request),validate.getCode());
+    protected void save(ServletWebRequest request, C validate) throws Exception {
+        sessionStrategy.setAttribute(request, SESSION_KEY_PREFIX + getProcessorType(request), validate.getCode());
     }
 
-    private String getProcessorType(ServletWebRequest request){
-        return StringUtils.substringAfter(request.getRequest().getRequestURI(),"/code/");
+    private String getProcessorType(ServletWebRequest request) {
+        return StringUtils.substringAfter(request.getRequest().getRequestURI(), "/code/");
     }
 }
