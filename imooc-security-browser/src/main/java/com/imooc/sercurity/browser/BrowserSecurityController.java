@@ -1,5 +1,6 @@
 package com.imooc.sercurity.browser;
 
+import com.imooc.security.core.properties.SecurityConstants;
 import com.imooc.security.core.properties.SecurityProperties;
 import com.imooc.sercurity.browser.support.SimpleResponse;
 import org.apache.commons.lang.StringUtils;
@@ -43,7 +44,7 @@ public class BrowserSecurityController {
      * @param response
      * @return
      */
-    @RequestMapping("/authentication/require")
+    @RequestMapping(SecurityConstants.DEFAULT_UNAUTHENTICATION_URL)
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public SimpleResponse requireAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -58,7 +59,7 @@ public class BrowserSecurityController {
 
         }
 
-        return new SimpleResponse("需要进行身份认证");
+        return new SimpleResponse("访问的服务需要身份认证，请引导用户到登录页");
     }
 
 }

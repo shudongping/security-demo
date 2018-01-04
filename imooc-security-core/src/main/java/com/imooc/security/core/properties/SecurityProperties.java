@@ -1,10 +1,13 @@
+/**
+ *
+ */
 package com.imooc.security.core.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
  * @author shudp
- * @create 2017/12/14.
+ *
  */
 @ConfigurationProperties(prefix = "imooc.security")
 public class SecurityProperties {
@@ -12,6 +15,15 @@ public class SecurityProperties {
     private BrowserProperties browser = new BrowserProperties();
 
     private ValidateCodeProperties code = new ValidateCodeProperties();
+
+
+    public BrowserProperties getBrowser() {
+        return browser;
+    }
+
+    public void setBrowser(BrowserProperties browser) {
+        this.browser = browser;
+    }
 
     public ValidateCodeProperties getCode() {
         return code;
@@ -21,11 +33,6 @@ public class SecurityProperties {
         this.code = code;
     }
 
-    public BrowserProperties getBrowser() {
-        return browser;
-    }
 
-    public void setBrowser(BrowserProperties browser) {
-        this.browser = browser;
-    }
 }
+

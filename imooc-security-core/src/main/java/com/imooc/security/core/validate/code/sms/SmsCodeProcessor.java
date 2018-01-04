@@ -11,7 +11,7 @@ import org.springframework.web.context.request.ServletWebRequest;
  * @author shudp
  * @create 2017/12/20.
  */
-@Component("smsCodeProcessor")
+@Component("smsValidateCodeProcessor")
 public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode> {
 
     @Autowired

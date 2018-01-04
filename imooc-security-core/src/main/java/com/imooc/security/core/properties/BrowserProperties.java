@@ -18,13 +18,13 @@ public class BrowserProperties {
         this.rememberMeSeconds = rememberMeSeconds;
     }
 
-    private LoginType loginType = LoginType.JSON;
+    private LoginResponseType loginType = LoginResponseType.JSON;
 
-    public LoginType getLoginType() {
+    public LoginResponseType getLoginType() {
         return loginType;
     }
 
-    public void setLoginType(LoginType loginType) {
+    public void setLoginType(LoginResponseType loginType) {
         this.loginType = loginType;
     }
 
