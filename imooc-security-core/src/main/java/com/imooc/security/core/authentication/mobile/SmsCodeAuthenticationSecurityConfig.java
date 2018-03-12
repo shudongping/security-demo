@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.imooc.security.core.authentication.mobile;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,33 +15,35 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.stereotype.Component;
 
 /**
- * @author shudp
- * @create 2017/12/25.
+ * @author zhailiang
+ *
  */
 @Component
-public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity>{
-
-    @Autowired
-    private AuthenticationSuccessHandler imoocAuthenticationSuccessHandler;
-    @Autowired
-    private AuthenticationFailureHandler imoocAuthenticationFailureHandler;
-    @Autowired
-    private UserDetailsService userDetailsService;
-
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-
-        SmsCodeAuthenticationFilter smsCodeAuthenticationFilter = new SmsCodeAuthenticationFilter();
-        smsCodeAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
-        smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(imoocAuthenticationSuccessHandler);
-        smsCodeAuthenticationFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
-
-        SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
-        smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);
-
-        http.authenticationProvider(smsCodeAuthenticationProvider)
-                .addFilterAfter(smsCodeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-
-    }
+public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
+	
+	@Autowired
+	private AuthenticationSuccessHandler imoocAuthenticationSuccessHandler;
+	
+	@Autowired
+	private AuthenticationFailureHandler imoocAuthenticationFailureHandler;
+	
+	@Autowired
+	private UserDetailsService userDetailsService;
+	
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+		
+		SmsCodeAuthenticationFilter smsCodeAuthenticationFilter = new SmsCodeAuthenticationFilter();
+		smsCodeAuthenticationFilter.setAuthenticationManager(http.getSharedObject(AuthenticationManager.class));
+		smsCodeAuthenticationFilter.setAuthenticationSuccessHandler(imoocAuthenticationSuccessHandler);
+		smsCodeAuthenticationFilter.setAuthenticationFailureHandler(imoocAuthenticationFailureHandler);
+		
+		SmsCodeAuthenticationProvider smsCodeAuthenticationProvider = new SmsCodeAuthenticationProvider();
+		smsCodeAuthenticationProvider.setUserDetailsService(userDetailsService);
+		
+		http.authenticationProvider(smsCodeAuthenticationProvider)
+			.addFilterAfter(smsCodeAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+		
+	}
 
 }

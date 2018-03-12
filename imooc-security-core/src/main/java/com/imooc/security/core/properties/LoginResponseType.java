@@ -1,10 +1,22 @@
+/**
+ * 
+ */
 package com.imooc.security.core.properties;
 
 /**
- * @author shudp
- * @create 2017/12/15.
+ * @author zhailiang
+ *
  */
 public enum LoginResponseType {
-    REDIRECT,
-    JSON;
+	
+	/**
+	 * 跳转
+	 */
+	REDIRECT,
+	
+	/**
+	 * 返回json
+	 */
+	JSON
+
 }

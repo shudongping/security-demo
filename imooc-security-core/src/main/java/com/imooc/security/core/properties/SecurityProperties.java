@@ -1,38 +1,45 @@
 /**
- *
+ * 
  */
 package com.imooc.security.core.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author shudp
+ * @author zhailiang
  *
  */
 @ConfigurationProperties(prefix = "imooc.security")
 public class SecurityProperties {
+	
+	private BrowserProperties browser = new BrowserProperties();
+	
+	private ValidateCodeProperties code = new ValidateCodeProperties();
+	
+	private SocialProperties social = new SocialProperties();
 
-    private BrowserProperties browser = new BrowserProperties();
+	public BrowserProperties getBrowser() {
+		return browser;
+	}
 
-    private ValidateCodeProperties code = new ValidateCodeProperties();
+	public void setBrowser(BrowserProperties browser) {
+		this.browser = browser;
+	}
 
+	public ValidateCodeProperties getCode() {
+		return code;
+	}
 
-    public BrowserProperties getBrowser() {
-        return browser;
-    }
+	public void setCode(ValidateCodeProperties code) {
+		this.code = code;
+	}
 
-    public void setBrowser(BrowserProperties browser) {
-        this.browser = browser;
-    }
+	public SocialProperties getSocial() {
+		return social;
+	}
 
-    public ValidateCodeProperties getCode() {
-        return code;
-    }
-
-    public void setCode(ValidateCodeProperties code) {
-        this.code = code;
-    }
-
-
+	public void setSocial(SocialProperties social) {
+		this.social = social;
+	}
 }
 

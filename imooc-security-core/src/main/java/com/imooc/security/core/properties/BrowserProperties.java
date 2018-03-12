@@ -1,38 +1,62 @@
+/**
+ * 
+ */
 package com.imooc.security.core.properties;
 
 /**
- * @author shudp
- * @create 2017/12/14.
+ * @author zhailiang
+ *
  */
 public class BrowserProperties {
+	
+	private SessionProperties session = new SessionProperties();
+	
+	private String signUpUrl = "/imooc-signUp.html";
+	
+	private String loginPage = SecurityConstants.DEFAULT_LOGIN_PAGE_URL;
+	
+	private LoginResponseType loginType = LoginResponseType.JSON;
+	
+	private int rememberMeSeconds = 3600;
 
-    private String loginPage = "/imooc-signIn.html";
+	public String getLoginPage() {
+		return loginPage;
+	}
 
-    private int rememberMeSeconds = 3600;
+	public void setLoginPage(String loginPage) {
+		this.loginPage = loginPage;
+	}
 
-    public int getRememberMeSeconds() {
-        return rememberMeSeconds;
-    }
+	public LoginResponseType getLoginType() {
+		return loginType;
+	}
 
-    public void setRememberMeSeconds(int rememberMeSeconds) {
-        this.rememberMeSeconds = rememberMeSeconds;
-    }
+	public void setLoginType(LoginResponseType loginType) {
+		this.loginType = loginType;
+	}
 
-    private LoginResponseType loginType = LoginResponseType.JSON;
+	public int getRememberMeSeconds() {
+		return rememberMeSeconds;
+	}
 
-    public LoginResponseType getLoginType() {
-        return loginType;
-    }
+	public void setRememberMeSeconds(int rememberMeSeconds) {
+		this.rememberMeSeconds = rememberMeSeconds;
+	}
 
-    public void setLoginType(LoginResponseType loginType) {
-        this.loginType = loginType;
-    }
+	public String getSignUpUrl() {
+		return signUpUrl;
+	}
 
-    public String getLoginPage() {
-        return loginPage;
-    }
+	public void setSignUpUrl(String signUpUrl) {
+		this.signUpUrl = signUpUrl;
+	}
 
-    public void setLoginPage(String loginPage) {
-        this.loginPage = loginPage;
-    }
+	public SessionProperties getSession() {
+		return session;
+	}
+
+	public void setSession(SessionProperties session) {
+		this.session = session;
+	}
+	
 }

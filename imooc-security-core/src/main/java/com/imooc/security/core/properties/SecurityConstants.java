@@ -4,8 +4,8 @@
 package com.imooc.security.core.properties;
 
 /**
- * @author shudp
- * @create 2017/12/26.
+ * @author zhailiang
+ *
  */
 public interface SecurityConstants {
 	
@@ -16,6 +16,7 @@ public interface SecurityConstants {
 	/**
 	 * 当请求需要身份认证时，默认跳转的url
 	 * 
+	 * @see SecurityController
 	 */
 	public static final String DEFAULT_UNAUTHENTICATION_URL = "/authentication/require";
 	/**
@@ -29,6 +30,7 @@ public interface SecurityConstants {
 	/**
 	 * 默认登录页面
 	 * 
+	 * @see SecurityController
 	 */
 	public static final String DEFAULT_LOGIN_PAGE_URL = "/imooc-signIn.html";
 	/**

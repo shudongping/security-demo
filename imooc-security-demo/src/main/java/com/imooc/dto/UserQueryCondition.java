@@ -1,49 +1,55 @@
+/**
+ * 
+ */
 package com.imooc.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * @author shudp
- * @create 2017/12/6.
+ * @author zhailiang
+ *
  */
 public class UserQueryCondition {
-    private String username;
-    @ApiModelProperty(value = "年龄")
-    private int age;
-    @ApiModelProperty(value = "年龄结束")
-    private int ageTo;
+	
+	private String username;
+	
+	@ApiModelProperty(value = "用户年龄起始值")
+	private int age;
+	@ApiModelProperty(value = "用户年龄终止值")
+	private int ageTo;
+	
+	private String xxx;
 
-    private String xx;
+	public String getUsername() {
+		return username;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public int getAge() {
+		return age;
+	}
 
-    public int getAge() {
-        return age;
-    }
+	public void setAge(int age) {
+		this.age = age;
+	}
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+	public int getAgeTo() {
+		return ageTo;
+	}
 
-    public int getAgeTo() {
-        return ageTo;
-    }
+	public void setAgeTo(int ageTo) {
+		this.ageTo = ageTo;
+	}
 
-    public void setAgeTo(int ageTo) {
-        this.ageTo = ageTo;
-    }
+	public String getXxx() {
+		return xxx;
+	}
 
-    public String getXx() {
-        return xx;
-    }
-
-    public void setXx(String xx) {
-        this.xx = xx;
-    }
+	public void setXxx(String xxx) {
+		this.xxx = xxx;
+	}
+	
 }

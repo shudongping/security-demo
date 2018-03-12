@@ -1,20 +1,23 @@
+/**
+ * 
+ */
 package com.imooc.security.core.validate.code;
 
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * @author shudp
- * @create 2017/12/17.
+ * @author zhailiang
+ *
  */
-public class ValidateCodeException extends AuthenticationException{
+public class ValidateCodeException extends AuthenticationException {
 
-    public  static final long serialVersionUID = 8848687408293611636L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7285211528095468156L;
 
-    public ValidateCodeException(String msg, Throwable t) {
-        super(msg, t);
-    }
+	public ValidateCodeException(String msg) {
+		super(msg);
+	}
 
-    public ValidateCodeException(String msg) {
-        super(msg);
-    }
 }

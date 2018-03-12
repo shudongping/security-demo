@@ -1,6 +1,8 @@
+/**
+ * 
+ */
 package com.imooc.security.core.authentication.mobile;
 
-import com.imooc.security.core.authentication.mobile.SmsCodeAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -9,42 +11,54 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
- * @author shudp
- * @create 2017/12/25.
+ * @author zhailiang
+ *
  */
-public class SmsCodeAuthenticationProvider implements AuthenticationProvider{
+public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 
+	private UserDetailsService userDetailsService;
 
-    private UserDetailsService userDetailsService;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.springframework.security.authentication.AuthenticationProvider#
+	 * authenticate(org.springframework.security.core.Authentication)
+	 */
+	@Override
+	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
-    public UserDetailsService getUserDetailsService() {
-        return userDetailsService;
-    }
+		SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;
+		
+		UserDetails user = userDetailsService.loadUserByUsername((String) authenticationToken.getPrincipal());
 
-    public void setUserDetailsService(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
+		if (user == null) {
+			throw new InternalAuthenticationServiceException("无法获取用户信息");
+		}
+		
+		SmsCodeAuthenticationToken authenticationResult = new SmsCodeAuthenticationToken(user, user.getAuthorities());
+		
+		authenticationResult.setDetails(authenticationToken.getDetails());
 
-    @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+		return authenticationResult;
+	}
 
-        SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.springframework.security.authentication.AuthenticationProvider#
+	 * supports(java.lang.Class)
+	 */
+	@Override
+	public boolean supports(Class<?> authentication) {
+		return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
+	}
 
-        UserDetails user = userDetailsService.loadUserByUsername((String) authenticationToken.getPrincipal());
+	public UserDetailsService getUserDetailsService() {
+		return userDetailsService;
+	}
 
-        if(user == null){
-            throw new InternalAuthenticationServiceException("无法获取用户信息");
-        }
+	public void setUserDetailsService(UserDetailsService userDetailsService) {
+		this.userDetailsService = userDetailsService;
+	}
 
-        SmsCodeAuthenticationToken authenticationResult = new SmsCodeAuthenticationToken(user,user.getAuthorities());
-
-        authenticationResult.setDetails(authenticationToken.getDetails());
-
-        return authenticationResult;
-    }
-
-    @Override
-    public boolean supports(Class<?> authentication) {
-        return SmsCodeAuthenticationToken.class.isAssignableFrom(authentication);
-    }
 }
